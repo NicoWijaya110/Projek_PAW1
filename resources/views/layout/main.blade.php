@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title') - E-Learning</title>
+    <title>E-Learning</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
     <style>
@@ -33,7 +33,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
         <a class="navbar-brand" href="#">E-Learning</a>
         <div class="ms-auto d-flex align-items-center text-white">
-            <i class="bi bi-person-circle me-2"></i> Admin
+            <i class="bi bi-person-circle me-2"></i> Admin 
         </div>
     </nav>
 
@@ -41,20 +41,23 @@
         <div class="row">
             <!-- Sidebar -->
             <div class="col-md-2 sidebar pt-4">
-                <a href="{{ route('materi.index') }}" class="{{ request()->is('materi*') ? 'active-link' : '' }}">
+                    <a href="">
+                    <i class="bi bi-graph-up me-2"></i> Dashboard
+                    </a>
+                    <a href="{{ route('materi.index') }}" class="{{ request()->is('materi*') ? 'active-link' : '' }}">
                     <i class="bi bi-journal-text me-2"></i> Materi
                 </a>
-                <a href="{{ route('quiz.index') ?? '#' }}">
-                    <i class="bi bi-patch-question me-2"></i> Kuis
+                <a href="">
+                    <i class="bi bi-patch-question me-2"></i> Jadwal
                 </a>
-                <a href="{{ route('siswa.index') ?? '#' }}">
-                    <i class="bi bi-people me-2"></i> Siswa
+                <a href="">
+                    <i class="bi bi-patch-question me-2"></i> Nilai
                 </a>
-                <a href="{{ route('dashboard') ?? '#' }}">
-                    <i class="bi bi-graph-up me-2"></i> Dashboard
+                <a href="">
+                    <i class="bi bi-people me-2"></i> Dosen
                 </a>
                 <a href="#">
-                    <i class="bi bi-box-arrow-right me-2"></i> Logout
+                    <i class="bi bi-people me-2"></i> Mahasiswa
                 </a>
             </div>
 

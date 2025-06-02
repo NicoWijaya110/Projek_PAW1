@@ -7,9 +7,7 @@ use Illuminate\Http\Request;
 
 class MateriController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
         $materi = Materi::all();
@@ -18,51 +16,51 @@ class MateriController extends Controller
         
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create()
-    {
-        //
+    {   
+        
+        return view('materi.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    
     public function store(Request $request)
     {
-        //
+        // Validasi input
+    $input = $request->validate([
+        'NO' => 'required|unique:materis',
+        'MATA_KULIAH' => 'required',
+        'DOSEN' => 'required',
+        'KELAS' => 'required|max:5',
+]);
+
+        // Simpan data materi
+        Materi::create($input);
+
+    // Redirect ke route materi.index
+    return redirect()->route('materi.index')->with('success', 'Materi berhasil ditambahkan');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Materi $materi)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+    
     public function edit(Materi $materi)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+    
     public function update(Request $request, Materi $materi)
     {
         //
     }
-
-    /**
-     * Remove the specified resource from storage.
-     */
+    
     public function destroy(Materi $materi)
     {
         //
     }
 }
+
