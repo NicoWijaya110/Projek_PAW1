@@ -43,24 +43,40 @@ class MateriController extends Controller
 
     public function show(Materi $materi)
     {
-        //
+        Materi::findOrFail($materi->id);
+        return view('materi.show', compact('materi'));
     }
 
     
     public function edit(Materi $materi)
     {
-        //
+        Materi::findOrFail($materi->id);
+        return view('materi.edit', compact('materi'));
     }
 
     
     public function update(Request $request, Materi $materi)
     {
-        //
+        
+    $validatedData = $request->validate([
+        'mata_kuliah' => 'required|string|max:255',
+        'dosen' => 'required|string|max:255',
+        'kelas' => 'required|string|max:255',
+    ]);
+
+    $materi->update($validatedData);
+
+    return redirect()->route('materi.index')->with('success', 'Data berhasil diubah.');
     }
     
     public function destroy(Materi $materi)
     {
-        //
+{
+    $materi->delete();
+
+    return redirect()->route('materi.index')->with('success', 'Materi berhasil dihapus.');
+}
+
     }
 }
 

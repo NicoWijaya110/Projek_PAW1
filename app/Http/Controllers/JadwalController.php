@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Jadwal;
+use App\Models\Materi;
 use Illuminate\Http\Request;
 
 class JadwalController extends Controller
@@ -22,7 +23,8 @@ class JadwalController extends Controller
      */
     public function create()
     {
-        //
+        $materi = Materi::all();
+        return view('jadwal.create', compact('materi'));
     }
 
     /**

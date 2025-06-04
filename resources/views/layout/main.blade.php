@@ -41,14 +41,14 @@
         <div class="row">
             <!-- Sidebar -->
             <div class="col-md-2 sidebar pt-4">
-                    <a href="">
-                    <i class="bi bi-graph-up me-2"></i> Dashboard
-                    </a>
-                    <a href="{{ route('materi.index') }}" class="{{ request()->is('materi*') ? 'active-link' : '' }}">
+                <a href="{{ route('dashboard.index') }}" class="{{ request()->is('dashboard.index') ? 'active-link' : '' }}">
+                <i class="bi bi-graph-up me-2"></i> Dashboard
+                </a>
+                <a href="{{ route('materi.index') }}" class="{{ request()->is('materi*') ? 'active-link' : '' }}">
                     <i class="bi bi-journal-text me-2"></i> Materi
                 </a>
-                <a href="">
-                    <i class="bi bi-patch-question me-2"></i> Jadwal
+                <a href="{{ route('jadwal.index') }}" class="{{ request()->is('jadwal*') ? 'active-link' : '' }}">
+                    <i class="bi bi-calendar3 me-2"></i> Jadwal
                 </a>
                 <a href="">
                     <i class="bi bi-patch-question me-2"></i> Nilai
@@ -68,6 +68,49 @@
         </div>
     </div>
 
+    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    @if(session('success'))
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            Swal.fire({
+                title: "Berhasil!",
+                text: "{{ session('success') }}",
+                icon: "success"
+            });
+        });
+    </script>
+    @endif
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const deleteButtons = document.querySelectorAll('.show_confirm');
+
+            deleteButtons.forEach(button => {
+                button.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    const form = this.closest("form");
+
+                    Swal.fire({
+                        title: "Apakah Anda yakin?",
+                        text: "Data yang dihapus tidak bisa dikembalikan!",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Ya, hapus!"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            form.submit();
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+
+    @stack('scripts')
 </body>
 </html>
