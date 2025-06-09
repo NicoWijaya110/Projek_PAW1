@@ -9,5 +9,8 @@ class Materi extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['NO', 'MATA_KULIAH', 'DOSEN', 'KELAS'];
+    protected $table = 'materis';
+    protected $primaryKey = 'no'; // Primary key
+    protected $fillable = ['no','mata_kuliah', 'dosen', 'kelas'];
+    
 }

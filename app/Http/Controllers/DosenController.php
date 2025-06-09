@@ -12,8 +12,8 @@ class DosenController extends Controller
      */
     public function index()
     {
-        $dosens = Dosen::all();
-        return view('materi.create', compact('dosens'));
+        $dosen = Dosen::all();
+        return view('dosen.index', compact('dosen'));
 
     }
 

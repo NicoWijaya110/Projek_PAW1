@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('nilai', function (Blueprint $table) {
             $table->id();
-            $table->string('NO', 10);
-            $table->string('nama', 50);
-            $table->date('Tahun_Masuk');
-            $table->string('foto');
+            $table->string('mata_kuliah', 50);
+            $table->string('tugas', 50);
+            $table->string('kuis', 50);
+            $table->string('uts', 50);
+            $table->string('uas', 50);
             $table->timestamps();
         });
     }

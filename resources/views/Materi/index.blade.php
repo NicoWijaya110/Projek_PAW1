@@ -25,14 +25,14 @@
                     <tbody>
                         @foreach ($materi as $item)
                         <tr>
-                            <td>{{ $item->NO }}</td>
-                            <td>{{ $item->Mata_Kuliah }}</td>
-                            <td>{{ $item->DOSEN }}</td>
-                            <td>{{ $item->KELAS }}</td>
+                            <td>{{ $item->no }}</td>
+                            <td>{{ $item->mata_kuliah }}</td>
+                            <td>{{ $item->dosen }}</td>
+                            <td>{{ $item->kelas }}</td>
                             <td>
-                                <a href="{{ route('materi.show', $item->id) }}" class="btn btn-info btn-sm">Show</a>
-                                <a href="{{ route('materi.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                                <form action="{{ route('materi.destroy', $item->id) }}" method="POST" class="d-inline">
+                                <a href="{{ route('materi.show', $item->no) }}" class="btn btn-info btn-sm">Show</a>
+                                <a href="{{ route('materi.edit', $item->no) }}" class="btn btn-warning btn-sm">Edit</a>
+                                <form action="{{ route('materi.destroy', $item->no) }}" method="POST" class="d-inline">
                                     @csrf
                                     @method('DELETE')
                                     <button type="button" class="btn btn-danger btn-sm show_confirm"

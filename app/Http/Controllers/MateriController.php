@@ -7,74 +7,60 @@ use Illuminate\Http\Request;
 
 class MateriController extends Controller
 {
-
     public function index()
     {
         $materi = Materi::all();
-        //dd($materis);
         return view('materi.index', compact('materi'));
-        
     }
-
 
     public function create()
     {   
-        
         return view('materi.create');
     }
 
-    
     public function store(Request $request)
-{
-    $request->validate([
-        'NO' => 'required',
-        'MATA_KULIAH' => 'required',
-        'DOSEN' => 'required',
-        'KELAS' => 'required',
-    ]);
+    {
+        $request->validate([
+            'no' => 'required|integer',
+            'mata_kuliah' => 'required|string|max:255',
+            'dosen' => 'required|string|max:255',
+            'kelas' => 'required|string|max:50',
+        ]);
 
-    Materi::create($request->all());
+        Materi::create($request->all());
 
-    return redirect()->route('materi.index')->with('success', 'Materi berhasil ditambahkan.');
-}
-
+        return redirect()->route('materi.index')->with('success', 'Materi berhasil ditambahkan.');
+    }
 
     public function show(Materi $materi)
     {
-        Materi::findOrFail($materi->id);
         return view('materi.show', compact('materi'));
     }
 
-    
     public function edit(Materi $materi)
     {
-        Materi::findOrFail($materi->id);
         return view('materi.edit', compact('materi'));
     }
 
-    
-    public function update(Request $request, Materi $materi)
+    public function update(Request $request, $id)
     {
-        
-    $validatedData = $request->validate([
-        'mata_kuliah' => 'required|string|max:255',
-        'dosen' => 'required|string|max:255',
-        'kelas' => 'required|string|max:255',
-    ]);
+        $request->validate([
+            'no' => 'required|integer',
+            'mata_kuliah' => 'required|string|max:255',
+            'dosen' => 'required|string|max:255',
+            'kelas' => 'required|string|max:50',
+        ]);
 
-    $materi->update($validatedData);
+        $materi = Materi::findOrFail($id);
+        $materi->update($request->all());
 
-    return redirect()->route('materi.index')->with('success', 'Data berhasil diubah.');
+        return redirect()->route('materi.index')->with('success', 'Data berhasil diubah.');
     }
-    
+
     public function destroy(Materi $materi)
     {
-{
-    $materi->delete();
+        $materi->delete();
 
-    return redirect()->route('materi.index')->with('success', 'Materi berhasil dihapus.');
-}
-
+        return redirect()->route('materi.index')->with('success', 'Materi berhasil dihapus.');
     }
 }
-

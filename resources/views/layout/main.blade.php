@@ -1,4 +1,4 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -50,9 +50,9 @@
                 <a href="{{ route('jadwal.index') }}" class="{{ request()->is('jadwal*') ? 'active-link' : '' }}">
                     <i class="bi bi-calendar3 me-2"></i> Jadwal
                 </a>
-                <a href="">
+                <!-- <a href="">
                     <i class="bi bi-patch-question me-2"></i> Nilai
-                </a>
+                </a> -->
                 <a href="{{ route('dosen.index') }}" class="{{ request()->is('dosen*') ? 'active-link' : '' }}">
                     <i class="bi bi-people me-2"></i> Dosen
                 </a>
