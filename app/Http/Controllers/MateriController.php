@@ -25,21 +25,19 @@ class MateriController extends Controller
 
     
     public function store(Request $request)
-    {
-        // Validasi input
-    $input = $request->validate([
-        'NO' => 'required|unique:materis',
+{
+    $request->validate([
+        'NO' => 'required',
         'MATA_KULIAH' => 'required',
         'DOSEN' => 'required',
-        'KELAS' => 'required|max:5',
-]);
+        'KELAS' => 'required',
+    ]);
 
-        // Simpan data materi
-        Materi::create($input);
+    Materi::create($request->all());
 
-    // Redirect ke route materi.index
-    return redirect()->route('materi.index')->with('success', 'Materi berhasil ditambahkan');
-    }
+    return redirect()->route('materi.index')->with('success', 'Materi berhasil ditambahkan.');
+}
+
 
     public function show(Materi $materi)
     {
