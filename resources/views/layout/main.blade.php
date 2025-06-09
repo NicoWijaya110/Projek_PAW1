@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -33,7 +33,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
         <a class="navbar-brand" href="#">E-Learning</a>
         <div class="ms-auto d-flex align-items-center text-white">
-            <i class="bi bi-person-circle me-2"></i> Admin 
+            <i class="bi bi-person-circle me-2"></i> Admin
         </div>
     </nav>
 
@@ -53,7 +53,7 @@
                 <a href="">
                     <i class="bi bi-patch-question me-2"></i> Nilai
                 </a>
-                <a href="">
+                <a href="{{ route('dosen.index') }}" class="{{ request()->is('dosen*') ? 'active-link' : '' }}">
                     <i class="bi bi-people me-2"></i> Dosen
                 </a>
                 <a href="#">
