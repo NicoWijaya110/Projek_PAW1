@@ -30,6 +30,7 @@
                                 <td>{{ $item->kelas }}</td>
                                 <td>{{ $item->dosen }}</td>
                                 <td>
+                                    
                                     <a href="{{ route('jadwal.show', $item->id) }}" class="btn btn-info btn-sm">Lihat</a>
                                     <a href="{{ route('jadwal.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
                                     <form action="{{ route('jadwal.destroy', $item->id) }}" method="POST" class="d-inline">
