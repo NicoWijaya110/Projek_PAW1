@@ -56,7 +56,7 @@
                 <a href="{{ route('dosen.index') }}" class="{{ request()->is('dosen*') ? 'active-link' : '' }}">
                     <i class="bi bi-people me-2"></i> Dosen
                 </a>
-                <a href="#">
+                <a href="{{ route('mahasiswa.index') }}" class="{{ request()->is('mahasiswa*') ? 'active-link' : '' }}">
                     <i class="bi bi-people me-2"></i> Mahasiswa
                 </a>
             </div>
