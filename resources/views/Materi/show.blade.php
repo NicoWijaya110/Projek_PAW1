@@ -33,7 +33,7 @@
                             </tr>
                         </table>
                         <a href="{{ route('materi.index') }}" class="btn btn-secondary mt-3">Kembali</a>
-                        <a href="{{ route('materi.edit', $materi->no) }}" class="btn btn-warning mt-3">Edit</a>
+                        <a href="{{ route('materi.edit', $materi->id) }}" class="btn btn-warning mt-3">Edit</a>
                     </div>
                 </div>
             </div>
