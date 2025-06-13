@@ -28,7 +28,21 @@ class NilaiController extends Controller
             'uas' => 'required|numeric|min:0|max:100',
         ]);
 
-        Nilai::create($request->all());
+        // Hitung rata-rata
+        $rataRata = ($request->tugas + $request->kuis + $request->uts + $request->uas) / 4;
+
+        // Tentukan status
+        $status = $rataRata >= 70 ? 'Lulus' : 'Tidak Lulus';
+
+        // Simpan data
+        Nilai::create([
+            'mata_kuliah' => $request->mata_kuliah,
+            'tugas' => $request->tugas,
+            'kuis' => $request->kuis,
+            'uts' => $request->uts,
+            'uas' => $request->uas,
+            'status' => $status,
+        ]);
 
         return redirect()->route('nilai.index')->with('success', 'Nilai berhasil ditambahkan.');
     }
@@ -54,7 +68,22 @@ class NilaiController extends Controller
         ]);
 
         $nilai = Nilai::findOrFail($id);
-        $nilai->update($request->all());
+
+        // Hitung rata-rata
+        $rataRata = ($request->tugas + $request->kuis + $request->uts + $request->uas) / 4;
+
+        // Tentukan status
+        $status = $rataRata >= 70 ? 'Lulus' : 'Tidak Lulus';
+
+        // Update data
+        $nilai->update([
+            'mata_kuliah' => $request->mata_kuliah,
+            'tugas' => $request->tugas,
+            'kuis' => $request->kuis,
+            'uts' => $request->uts,
+            'uas' => $request->uas,
+            'status' => $status,
+        ]);
 
         return redirect()->route('nilai.index')->with('success', 'Nilai berhasil diubah.');
     }
@@ -62,7 +91,6 @@ class NilaiController extends Controller
     public function destroy(Nilai $nilai)
     {
         $nilai->delete();
-
         return redirect()->route('nilai.index')->with('success', 'Nilai berhasil dihapus.');
     }
 }

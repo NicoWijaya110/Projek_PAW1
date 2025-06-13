@@ -38,6 +38,11 @@
                             <label class="form-label">Nilai UAS</label>
                             <input type="number" class="form-control" name="uas" value="{{ old('uas', $nilai->uas) }}">
                         </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Status</label>
+                            <input type="text" class="form-control" value="{{ ($nilai->tugas + $nilai->kuis + $nilai->uts + $nilai->uas) / 4 >= 70 ? 'Lulus' : 'Tidak Lulus' }}" disabled>
+                        </div>
                     </div>
 
                     <div class="card-footer">

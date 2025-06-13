@@ -30,6 +30,18 @@
                                 <th>Nilai UAS</th>
                                 <td>{{ $nilai->uas }}</td>
                             </tr>
+                            @php
+                                $rata = ($nilai->tugas + $nilai->kuis + $nilai->uts + $nilai->uas) / 4;
+                                $status = $rata >= 70 ? 'Lulus' : 'Tidak Lulus';
+                            @endphp
+                            <tr>
+                                <th>Status</th>
+                                <td>
+                                    <span class="badge bg-{{ $status === 'Lulus' ? 'success' : 'danger' }}">
+                                        {{ $status }}
+                                    </span>
+                                </td>
+                            </tr>
                         </table>
                         <a href="{{ route('nilai.index') }}" class="btn btn-secondary mt-3">Kembali</a>
                         <a href="{{ route('nilai.edit', $nilai->id) }}" class="btn btn-warning mt-3">Edit</a>

@@ -21,11 +21,16 @@
                             <th>Nilai Kuis</th>
                             <th>Nilai UTS</th>
                             <th>Nilai UAS</th>
+                            <th>Status</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($nilai as $index => $item)
+                        @php
+                            $rata = ($item->tugas + $item->kuis + $item->uts + $item->uas) / 4;
+                            $status = $rata >= 70 ? 'Lulus' : 'Tidak Lulus';
+                        @endphp
                         <tr>
                             <td>{{ $index + 1 }}</td>
                             <td>{{ $item->mata_kuliah }}</td>
@@ -34,13 +39,17 @@
                             <td>{{ $item->uts }}</td>
                             <td>{{ $item->uas }}</td>
                             <td>
+                                <span class="badge bg-{{ $status === 'Lulus' ? 'success' : 'danger' }}">
+                                    {{ $status }}
+                                </span>
+                            </td>
+                            <td>
                                 <a href="{{ route('nilai.show', $item->id) }}" class="btn btn-info btn-sm">Show</a>
                                 <a href="{{ route('nilai.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
                                 <form action="{{ route('nilai.destroy', $item->id) }}" method="POST" class="d-inline">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm show_confirm"
-                                        data-nama="{{ $item->mata_kuliah }}">Delete</button>
+                                    <button type="submit" class="btn btn-danger btn-sm show_confirm" data-nama="{{ $item->mata_kuliah }}">Delete</button>
                                 </form>
                             </td>
                         </tr>
