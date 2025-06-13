@@ -11,106 +11,139 @@
             background-color: #f8f9fa;
         }
         .sidebar {
-            min-height: 100vh;
+            height: 100vh;
             background-color: #343a40;
-            color: white;
+            padding: 15px;
         }
         .sidebar a {
-            color: white;
-            text-decoration: none;
             display: block;
-            padding: 12px 20px;
+            color: #fff;
+            padding: 10px;
+            margin-bottom: 5px;
+            text-decoration: none;
+            border-radius: 5px;
         }
-        .sidebar a:hover {
+        .sidebar a:hover,
+        .sidebar .active-link {
             background-color: #495057;
         }
-        .active-link {
+        .accordion-button {
+            color: #fff;
+        }
+        .accordion-button:not(.collapsed) {
             background-color: #495057;
+        }
+        .accordion-body a {
+            color: #fff;
+            padding-left: 30px;
+            display: block;
+        }
+        .accordion-body a:hover,
+        .accordion-body .active-link {
+            background-color: #6c757d;
         }
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
-        <a class="navbar-brand" href="#">E-Learning</a>
-        <div class="ms-auto d-flex align-items-center text-white">
-            <i class="bi bi-person-circle me-2"></i> Admin
-        </div>
-    </nav>
-
-    <div class="container-fluid">
-        <div class="row">
-            <!-- Sidebar -->
-            <div class="col-md-2 sidebar pt-4">
-                <a href="{{ route('dashboard.index') }}" class="{{ request()->is('dashboard.index') ? 'active-link' : '' }}">
+<div class="container-fluid">
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-md-2 sidebar">
+            <h4 class="text-white">E-Learning</h4>
+            <a href="{{ route('dashboard.index') }}" class="{{ request()->is('dashboard*') ? 'active-link' : '' }}">
                 <i class="bi bi-graph-up me-2"></i> Dashboard
-                </a>
-                <a href="{{ route('materi.index') }}" class="{{ request()->is('materi*') ? 'active-link' : '' }}">
-                    <i class="bi bi-journal-text me-2"></i> Materi
-                </a>
-                <a href="{{ route('jadwal.index') }}" class="{{ request()->is('jadwal*') ? 'active-link' : '' }}">
-                    <i class="bi bi-calendar3 me-2"></i> Jadwal
-                </a>
-                 <a href="">
-                    <i class="bi bi-patch-question me-2"></i> Nilai
-                </a>
-                <a href="{{ route('dosen.index') }}" class="{{ request()->is('dosen*') ? 'active-link' : '' }}">
-                    <i class="bi bi-people me-2"></i> Dosen
-                </a>
-                <a href="{{ route('mahasiswa.index') }}" class="{{ request()->is('mahasiswa*') ? 'active-link' : '' }}">
-                    <i class="bi bi-people me-2"></i> Mahasiswa
-                </a>
-            </div>
+            </a>
 
-            <!-- Content -->
-            <div class="col-md-10 p-4">
+            <div class="accordion" id="sidebarAccordion">
+                <div class="accordion-item bg-transparent border-0">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button bg-transparent text-white collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAkademik" aria-expanded="false" aria-controls="collapseAkademik">
+                            <i class="bi bi-book me-2"></i> Akademik
+                        </button>
+                    </h2>
+                    <div id="collapseAkademik" class="accordion-collapse collapse {{ request()->is('materi*') || request()->is('jadwal*') || request()->is('nilai*') ? 'show' : '' }}" data-bs-parent="#sidebarAccordion">
+                        <div class="accordion-body p-0">
+                            <a href="{{ route('materi.index') }}" class="{{ request()->is('materi*') ? 'active-link' : '' }}">Materi</a>
+                            <a href="{{ route('jadwal.index') }}" class="{{ request()->is('jadwal*') ? 'active-link' : '' }}">Jadwal</a>
+                            <a href="{{ route('nilai.index') }}" class="{{ request()->is('nilai*') ? 'active-link' : '' }}">Nilai</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item bg-transparent border-0">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button bg-transparent text-white collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseUser" aria-expanded="false" aria-controls="collapseUser">
+                            <i class="bi bi-person-gear me-2"></i> User
+                        </button>
+                    </h2>
+                    <div id="collapseUser" class="accordion-collapse collapse {{ request()->is('dosen*') || request()->is('mahasiswa*') ? 'show' : '' }}" data-bs-parent="#sidebarAccordion">
+                        <div class="accordion-body p-0">
+                            <a href="{{ route('dosen.index') }}" class="{{ request()->is('dosen*') ? 'active-link' : '' }}">Dosen</a>
+                            <a href="{{ route('mahasiswa.index') }}" class="{{ request()->is('mahasiswa*') ? 'active-link' : '' }}">Mahasiswa</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="col-md-10">
+            <nav class="navbar navbar-expand navbar-dark bg-dark">
+                <div class="container-fluid justify-content-end">
+                    <span class="navbar-text text-white me-3">
+                        <i class="bi bi-person-circle"></i> {{ Auth::check() ? Auth::user()->name : 'Guest' }}
+                    </span>
+                </div>
+            </nav>
+            <div class="container mt-4">
                 @yield('content')
             </div>
         </div>
     </div>
+</div>
 
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    @if(session('success'))
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            Swal.fire({
-                title: "Berhasil!",
-                text: "{{ session('success') }}",
-                icon: "success"
-            });
+@if(session('success'))
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        Swal.fire({
+            title: "Berhasil!",
+            text: "{{ session('success') }}",
+            icon: "success"
         });
-    </script>
-    @endif
+    });
+</script>
+@endif
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const deleteButtons = document.querySelectorAll('.show_confirm');
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const deleteButtons = document.querySelectorAll('.show_confirm');
 
-            deleteButtons.forEach(button => {
-                button.addEventListener('click', function (event) {
-                    event.preventDefault();
-                    const form = this.closest("form");
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', function (event) {
+                event.preventDefault();
+                const form = this.closest("form");
 
-                    Swal.fire({
-                        title: "Apakah Anda yakin?",
-                        text: "Data yang dihapus tidak bisa dikembalikan!",
-                        icon: "warning",
-                        showCancelButton: true,
-                        confirmButtonColor: "#3085d6",
-                        cancelButtonColor: "#d33",
-                        confirmButtonText: "Ya, hapus!"
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            form.submit();
-                        }
-                    });
+                Swal.fire({
+                    title: "Apakah Anda yakin?",
+                    text: "Data yang dihapus tidak bisa dikembalikan!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Ya, hapus!"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit();
+                    }
                 });
             });
         });
-    </script>
+    });
+</script>
 
-    @stack('scripts')
+@stack('scripts')
 </body>
 </html>

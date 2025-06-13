@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DosenController;
 use App\Http\Controllers\MahasiswaController;
+use App\Http\Controllers\NilaiController;
+use App\Models\Nilai;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::get('/', function () {
@@ -19,3 +21,4 @@ Route::resource('jadwal',JadwalController::class);
 Route::resource('dashboard', DashboardController::class);
 Route::resource('dosen',DosenController::class);
 Route::resource('mahasiswa', MahasiswaController::class);
+Route::resource('nilai',NilaiController::class);
