@@ -9,8 +9,8 @@ class MateriController extends Controller
 {
     public function index()
     {
-        $materi = Materi::all();
-        return view('materi.index', compact('materi'));
+    $materi = Materi::all();
+    return view('materi.index', compact('materi'));
     }
 
     public function create()
@@ -21,7 +21,6 @@ class MateriController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'no' => 'required|integer',
             'mata_kuliah' => 'required|string|max:255',
             'dosen' => 'required|string|max:255',
             'kelas' => 'required|string|max:50',
