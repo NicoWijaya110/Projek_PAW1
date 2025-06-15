@@ -11,14 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('absensis', function (Blueprint $table) {
-        $table->id();
-        $table->foreignId('mata_kuliah', 50)->constrained()->onDelete('cascade');
-        $table->foreignId('kelas', 50)->constrained()->onDelete('cascade');
-        $table->unsignedInteger('pertemuan');
-        $table->enum('status', ['H', 'I', 'A']);
-        $table->timestamps();
+        Schema::create('absens', function (Blueprint $table) {
+    $table->id();
+    $table->foreignId('mahasiswa_id')->constrained()->onDelete('cascade');
+    $table->foreignId('materi_id')->constrained('materis')->onDelete('cascade');
+    $table->unsignedInteger('pertemuan_ke');
+    $table->enum('status', ['H', 'I', 'A']);
+    $table->timestamps();
 });
+
+
     }
 
     /**
@@ -26,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('absens');
+        Schema::dropIfExists('absen');
     }
 };

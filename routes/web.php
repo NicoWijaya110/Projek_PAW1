@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AbsenController;
 use App\Http\Controllers\AbsensiController;
 use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\MateriController;
@@ -24,4 +25,6 @@ Route::resource('dashboard', DashboardController::class);
 Route::resource('dosen',DosenController::class);
 Route::resource('mahasiswa', MahasiswaController::class);
 Route::resource('nilai',NilaiController::class);
+Route::resource('absen', AbsenController::class);
 
+Route::get('/rekap-absensi', [AbsenController::class, 'rekap'])->name('absen.rekap');
