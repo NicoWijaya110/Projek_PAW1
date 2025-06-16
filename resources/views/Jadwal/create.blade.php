@@ -1,5 +1,5 @@
 @extends('layout.main')
-@section('title', 'Materi')
+@section('title', 'jadwal')
 @section('content')
     <div class="container-fluid">
         <div class="row">
@@ -9,7 +9,7 @@
                         <div class="card-title">Tambah Jadwal</div>
                     </div>
 
-                    <form action="{{ route('materi.store') }}" method="POST">
+                    <form action="{{ route('jadwal.store') }}" method="POST">
                         @csrf
                         <div class="card-body">
                             <div class="mb-3">
@@ -21,32 +21,40 @@
                             @enderror
 
                             <div class="mb-3">
-                                <label for="mata_kuliah" class="form-label">MATA KULIAH</label>
-                                <input type="text" class="form-control" name="mata_kuliah" value="{{ old('mata_kuliah') }}">
+                                <label for="hari" class="form-label">hari</label>
+                                <input type="text" class="form-control" name="hari" value="{{ old('hari') }}">
                             </div>
-                            @error('mata_kuliah')
+                            @error('hari')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
 
                             <div class="mb-3">
-                                <label for="dosen" class="form-label">DOSEN</label>
-                                <input type="text" class="form-control" name="dosen" value="{{ old('dosen') }}">
+                                <label for="jam" class="form-label">jam</label>
+                                <input type="text" class="form-control" name="jam" value="{{ old('jam') }}">
                             </div>
-                            @error('dosen')
+                            @error('jam')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
-
+                            <div class="mb-3">
+                                <label for="mata_kuliah" class="form-label">MATA KULIAH</label>
+                                <input type="text" class="form-control" name="mata_kuliah" value="{{ old('mata_kuliah') }}">
                             <div class="mb-3">
                                 <label for="kelas" class="form-label">KELAS</label>
                                 <input type="text" class="form-control" name="kelas" value="{{ old('kelas') }}">
                             </div>
+                             <div class="mb-3">
+                            <label for="dosen" class="form-label">DOSEN</label>
+                            <input type="text" class="form-control" name="dosen" value="{{ old('dosen') }}">    
+
+
                             @error('kelas')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
+                       
 
-                        <div class="card-footer">
                             <button type="submit" class="btn btn-primary">Submit</button>
+                            
                         </div>
                     </form>
                 </div>

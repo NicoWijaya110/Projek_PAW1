@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Jadwal;
-use App\Models\Materi;
+
 use Illuminate\Http\Request;
 
 class JadwalController extends Controller
@@ -32,17 +32,21 @@ class JadwalController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-        'NO' => 'required|unique:Jadwal',
-        'Hari' => 'required|date_format:d-m-y',
-        'Jam' => 'required|time_format:H:i',
-        'Mata Kuliah' => 'required|string|max:50',
-        'Kelas' => 'required|string|max:30',
-        'Dosen' => 'required|string|max:50',
-        
-    ]);   
-  
+$validated = $request->validate([
+    'no' => 'required',
+    'hari' => 'required|date_format:d-m-y',
+    'jam' => 'required|date_format:H:i',
+    'mata_kuliah' => 'required|string|max:50',
+    'kelas' => 'required|string|max:30',
+    'dosen' => 'required|string|max:50',
+]);
+
+Jadwal::create($validated);
+return redirect()->route('jadwal.index')->with('success', 'Jadwal berhasil ditambahkan');
     }
+        
+ 
+
     /**
      * Display the specified resource.
      */
@@ -56,6 +60,7 @@ class JadwalController extends Controller
      */
     public function edit(Jadwal $jadwal)
     {
+        $jadwal = Jadwal::all();
         return view('jadwal.edit', compact('jadwal'));
     }
 
@@ -64,16 +69,17 @@ class JadwalController extends Controller
      */
     public function update(Request $request, Jadwal $jadwal)
     {
-              $validated = $request->validate([
-        'NO' => 'required|unique:Jadwal',
-        'Hari' => 'required|date_format:d-m-y',
-        'Jam' => 'required|time_format:H:i',
-        'Mata Kuliah' => 'required|string|max:50',
-        'Kelas' => 'required|string|max:30',
-        'Dosen' => 'required|string|max:50',
-              ]);
-                      $jadwal = Jadwal::findOrFail($id);
-        $jadwal->update($request->all());
+$validated = $request->validate([
+    'NO' => 'required',
+    'hari' => 'required|date_format:d-m-y',
+    'jam' => 'required|date_format:H:i',
+    'mata_kuliah' => 'required|string|max:50',
+    'kelas' => 'required|string|max:30',
+    'dosen' => 'required|string|max:50',
+]);
+
+
+        $jadwal->update($validated);
 
         return redirect()->route('jadwal.index')->with('success', 'Data berhasil diubah.');
     }

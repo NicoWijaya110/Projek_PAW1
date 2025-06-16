@@ -13,14 +13,7 @@
                     @csrf
                     @method('PUT')
 
-                    <div class="card-body">
-                        <div class="mb-3">
-                            <label class="form-label">NO</label>
-                            <input type="text" class="form-control" name="NO" value="{{ old('NO', $dosen->NO) }}">
-                            @error('NO')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
+
 
                         <div class="mb-3">
                             <label class="form-label">Nama</label>

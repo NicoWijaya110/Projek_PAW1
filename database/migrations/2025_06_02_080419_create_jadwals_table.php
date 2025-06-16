@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('NO',10);
             $table->string('Hari',30);
             $table->string('Jam',30);
-            $table->string('Mata Kuliah',50);
+            $table->string('mata_kuliah',50);
             $table->string('Kelas',30);
             $table->string('Dosen',50);
             $table->timestamps();
