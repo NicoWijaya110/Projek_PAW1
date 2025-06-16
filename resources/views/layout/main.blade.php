@@ -64,9 +64,9 @@
                             <i class="bi bi-chevron-down ms-auto toggle-icon"></i>
                         </button>
                     </h2>
-                    <div id="collapseAkademik" class="accordion-collapse collapse {{ request()->is('absen*') || request()->is('materi*') || request()->is('jadwal*') || request()->is('nilai*') ? 'show' : '' }}" data-bs-parent="#sidebarAccordion">
+                    <div id="collapseAkademik" class="accordion-collapse collapse {{ request()->is('materi*') || request()->is('jadwal*') || request()->is('nilai*') ? 'show' : '' }}" data-bs-parent="#sidebarAccordion">
                         <div class="accordion-body p-0">
-                            <a href="{{ route('absen.index') }}" class="{{ request()->is('absen*') ? 'active-link' : '' }}">Absen</a>
+                            <!--<a href="{{ route('absen.index') }}" class="{{ request()->is('absen*') ? 'active-link' : '' }}">Absen</a> -->
                             <a href="{{ route('materi.index') }}" class="{{ request()->is('materi*') ? 'active-link' : '' }}">Materi</a>
                             <a href="{{ route('jadwal.index') }}" class="{{ request()->is('jadwal*') ? 'active-link' : '' }}">Jadwal</a>
                             <a href="{{ route('nilai.index') }}" class="{{ request()->is('nilai*') ? 'active-link' : '' }}">Nilai</a>
