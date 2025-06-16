@@ -63,7 +63,8 @@ class DosenController extends Controller
      */
     public function edit(Dosen $dosen)
     {
-        //
+        $dosen = Dosen::findOrFail($dosen->id);
+        return view('Dosen.edit', compact('dosen'));
     }
 
     /**
@@ -71,8 +72,27 @@ class DosenController extends Controller
      */
     public function update(Request $request, Dosen $dosen)
     {
-        //
+    $validated = $request->validate([
+        'NO' => 'required|max:10',
+        'nama' => 'required|max:50',
+        'Tahun_Masuk' => 'required|date',
+        'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+    ]);
+
+    // Handle upload foto baru jika ada
+    if ($request->hasFile('foto')) {
+        $fotoBaru = $request->file('foto')->getClientOriginalName();
+        $request->file('foto')->move(public_path('images'), $fotoBaru);
+        $validated['foto'] = $fotoBaru;
+    } else {
+        // Jika tidak upload foto baru, gunakan foto lama
+        $validated['foto'] = $dosen->foto;
     }
+
+    $dosen->update($validated);
+
+    return redirect()->route('dosen.index')->with('success', 'Data dosen berhasil diupdate.');
+}
 
     /**
      * Remove the specified resource from storage.

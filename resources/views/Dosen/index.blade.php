@@ -14,10 +14,10 @@
                     <thead class="table-dark">
                         <tr>
                             <th>No</th>
-                            <th>NO</th>
+                            <th>Foto</th>
+                            <th>Nomor Dosen</th>
                             <th>Nama</th>
                             <th>Tahun Masuk</th>
-                            <th>Foto</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -25,9 +25,6 @@
                         @forelse ($dosen as $index => $item)
                             <tr>
                                 <td>{{ $index + 1 }}</td>
-                                <td>{{ $item->NO }}</td>
-                                <td>{{ $item->nama }}</td>
-                                <td>{{ $item->Tahun_Masuk }}</td>
                                 <td>
                                     @if($item->foto)
                                         <img src="{{ asset('images/' . $item->foto) }}" width="60" alt="Foto Dosen">
@@ -35,6 +32,10 @@
                                         -
                                     @endif
                                 </td>
+                                <td>{{ $item->NO }}</td>
+                                <td>{{ $item->nama }}</td>
+                                <td>{{ $item->Tahun_Masuk }}</td>
+
                                 <td>
                                     <a href="{{ route('dosen.show', $item->id) }}" class="btn btn-info btn-sm">Lihat</a>
                                     <a href="{{ route('dosen.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>

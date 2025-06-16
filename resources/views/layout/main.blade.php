@@ -29,7 +29,6 @@
         }
         .accordion-button {
             color: #fff;
-            background-color: transparent;
         }
         .accordion-button:not(.collapsed) {
             background-color: #495057;
@@ -56,17 +55,15 @@
             </a>
 
             <div class="accordion" id="sidebarAccordion">
-                <!-- Akademik -->
                 <div class="accordion-item bg-transparent border-0">
                     <h2 class="accordion-header">
-                        <button class="accordion-button collapsed d-flex justify-content-between align-items-center" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAkademik" aria-expanded="false" aria-controls="collapseAkademik">
-                            <span><i class="bi bi-book me-2"></i> Akademik</span>
-                            <i class="bi bi-chevron-down ms-auto toggle-icon"></i>
+                        <button class="accordion-button bg-transparent text-white collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAkademik" aria-expanded="false" aria-controls="collapseAkademik">
+                            <i class="bi bi-book me-2"></i> Akademik
                         </button>
                     </h2>
                     <div id="collapseAkademik" class="accordion-collapse collapse {{ request()->is('materi*') || request()->is('jadwal*') || request()->is('nilai*') ? 'show' : '' }}" data-bs-parent="#sidebarAccordion">
                         <div class="accordion-body p-0">
-                            <!--<a href="{{ route('absen.index') }}" class="{{ request()->is('absen*') ? 'active-link' : '' }}">Absen</a> -->
+                           <!-- <a href="{{ route('absen.index') }}" class="{{ request()->is('absen*') ? 'active-link' : '' }}">Absen</a> -->
                             <a href="{{ route('materi.index') }}" class="{{ request()->is('materi*') ? 'active-link' : '' }}">Materi</a>
                             <a href="{{ route('jadwal.index') }}" class="{{ request()->is('jadwal*') ? 'active-link' : '' }}">Jadwal</a>
                             <a href="{{ route('nilai.index') }}" class="{{ request()->is('nilai*') ? 'active-link' : '' }}">Nilai</a>
@@ -74,12 +71,10 @@
                     </div>
                 </div>
 
-                <!-- User -->
                 <div class="accordion-item bg-transparent border-0">
                     <h2 class="accordion-header">
-                        <button class="accordion-button collapsed d-flex justify-content-between align-items-center" type="button" data-bs-toggle="collapse" data-bs-target="#collapseUser" aria-expanded="false" aria-controls="collapseUser">
-                            <span><i class="bi bi-person-gear me-2"></i> User</span>
-                            <i class="bi bi-chevron-down ms-auto toggle-icon"></i>
+                        <button class="accordion-button bg-transparent text-white collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseUser" aria-expanded="false" aria-controls="collapseUser">
+                            <i class="bi bi-person-gear me-2"></i> User
                         </button>
                     </h2>
                     <div id="collapseUser" class="accordion-collapse collapse {{ request()->is('dosen*') || request()->is('mahasiswa*') ? 'show' : '' }}" data-bs-parent="#sidebarAccordion">
@@ -123,33 +118,29 @@
 </script>
 @endif
 
-<!-- Script Toggle Panah -->
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const accordions = document.querySelectorAll('.accordion-button');
+    document.addEventListener("DOMContentLoaded", function () {
+        const deleteButtons = document.querySelectorAll('.show_confirm');
 
-        accordions.forEach(button => {
-            const icon = button.querySelector('.toggle-icon');
-            const collapseId = button.getAttribute('data-bs-target');
-            const collapseElement = document.querySelector(collapseId);
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', function (event) {
+                event.preventDefault();
+                const form = this.closest("form");
 
-            // Ubah ikon saat accordion dibuka
-            collapseElement.addEventListener('show.bs.collapse', function () {
-                icon.classList.remove('bi-chevron-down');
-                icon.classList.add('bi-chevron-up');
+                Swal.fire({
+                    title: "Apakah Anda yakin?",
+                    text: "Data yang dihapus tidak bisa dikembalikan!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Ya, hapus!"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit();
+                    }
+                });
             });
-
-            // Ubah ikon saat accordion ditutup
-            collapseElement.addEventListener('hide.bs.collapse', function () {
-                icon.classList.remove('bi-chevron-up');
-                icon.classList.add('bi-chevron-down');
-            });
-
-            // Atur kondisi awal jika sudah dalam state show
-            if (collapseElement.classList.contains('show')) {
-                icon.classList.remove('bi-chevron-down');
-                icon.classList.add('bi-chevron-up');
-            }
         });
     });
 </script>
