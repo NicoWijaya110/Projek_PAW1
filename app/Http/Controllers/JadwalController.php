@@ -34,7 +34,7 @@ class JadwalController extends Controller
     {
 $validated = $request->validate([
     'no' => 'required',
-    'hari' => 'required|date_format:d-m-y',
+    'hari' => 'required|date_format:d-m-Y',
     'jam' => 'required|date_format:H:i',
     'mata_kuliah' => 'required|string|max:50',
     'kelas' => 'required|string|max:30',
@@ -45,8 +45,8 @@ Jadwal::create($validated);
 
 return redirect()->route('jadwal.index')->with('success', 'Jadwal berhasil ditambahkan');
     }
-        
- 
+
+
 
     /**
      * Display the specified resource.
@@ -61,7 +61,7 @@ return redirect()->route('jadwal.index')->with('success', 'Jadwal berhasil ditam
      */
     public function edit(Jadwal $jadwal)
     {
-       
+
         return view('jadwal.edit', compact('jadwal'));
     }
 
@@ -71,8 +71,7 @@ return redirect()->route('jadwal.index')->with('success', 'Jadwal berhasil ditam
     public function update(Request $request, Jadwal $jadwal)
     {
 $validated = $request->validate([
-    'no ' => 'required',
-    'hari' => 'required|date_format:d-m-y',
+    'hari' => 'required|date_format:d-m-Y',
     'jam' => 'required|date_format:H:i',
     'mata_kuliah' => 'required|string|max:50',
     'kelas' => 'required|string|max:30',

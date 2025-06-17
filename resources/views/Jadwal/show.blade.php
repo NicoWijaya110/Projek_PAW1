@@ -19,7 +19,7 @@
                     </div>
                     <div class="card-body">
                         <table class="table">
-                            <tr>    
+                            <tr>
                                 <th>NO</th>
                                 <td>{{ $jadwal->no }}</td>
                             </tr>

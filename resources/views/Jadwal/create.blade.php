@@ -44,14 +44,14 @@
                             </div>
                              <div class="mb-3">
                             <label for="dosen" class="form-label">DOSEN</label>
-                            <input type="text" class="form-control" name="dosen" value="{{ old('dosen') }}">    
+                            <input type="text" class="form-control" name="dosen" value="{{ old('dosen') }}">
 
 
                             @error('kelas')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
-                       
+
 
                             <button type="submit" class="btn btn-primary">Submit</button>
                             <a href="{{ route('jadwal.index') }}" class="btn btn-secondary">Batal</a>
