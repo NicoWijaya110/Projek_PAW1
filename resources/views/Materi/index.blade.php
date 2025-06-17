@@ -17,7 +17,6 @@
                         <tr>
                             <th>NO</th>
                             <th>MATA KULIAH</th>
-                            <th>JAM</th>
                             <th>DOSEN</th>
                             <th>KELAS</th>
                             <th>Aksi</th>
@@ -28,7 +27,6 @@
                         <tr>
                             <td>{{ $item->no }}</td>
                             <td>{{ $item->mata_kuliah }}</td>
-                            <td>{{$item->jam}}</td>
                             <td>{{ $item->dosen }}</td>
                             <td>{{ $item->kelas }}</td>
                             <td>

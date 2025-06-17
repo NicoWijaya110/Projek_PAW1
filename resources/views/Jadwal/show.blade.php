@@ -28,6 +28,10 @@
                                 <td>{{ $jadwal->hari }}</td>
                             </tr>
                             <tr>
+                                <th>Jam</th>
+                                <td>{{ $jadwal->jam }}</td>
+                            </tr>
+                            <tr>
                                 <th>Mata Kuliah</th>
                                 <td>{{ $jadwal->mata_kuliah }}</td>
                             </tr>

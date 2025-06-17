@@ -15,6 +15,7 @@
                         <tr>
                             <th>No</th>
                             <th>Hari</th>
+                            <th>Jam</th>
                             <th>Mata Kuliah</th>
                             <th>Kelas</th>
                             <th>Dosen</th>
@@ -26,6 +27,7 @@
                             <tr>
                                 <td>{{ $index + 1 }}</td>
                                 <td>{{ $item->hari }}</td>
+                                <td>{{$item->jam}}</td>
                                 <td>{{ $item->mata_kuliah }}</td>
                                 <td>{{ $item->kelas }}</td>
                                 <td>{{ $item->dosen }}</td>

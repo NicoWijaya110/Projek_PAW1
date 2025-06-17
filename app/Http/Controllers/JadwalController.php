@@ -42,6 +42,7 @@ $validated = $request->validate([
 ]);
 
 Jadwal::create($validated);
+
 return redirect()->route('jadwal.index')->with('success', 'Jadwal berhasil ditambahkan');
     }
         
@@ -60,7 +61,7 @@ return redirect()->route('jadwal.index')->with('success', 'Jadwal berhasil ditam
      */
     public function edit(Jadwal $jadwal)
     {
-        $jadwal = Jadwal::all();
+       
         return view('jadwal.edit', compact('jadwal'));
     }
 
@@ -70,7 +71,7 @@ return redirect()->route('jadwal.index')->with('success', 'Jadwal berhasil ditam
     public function update(Request $request, Jadwal $jadwal)
     {
 $validated = $request->validate([
-    'NO' => 'required',
+    'no ' => 'required',
     'hari' => 'required|date_format:d-m-y',
     'jam' => 'required|date_format:H:i',
     'mata_kuliah' => 'required|string|max:50',
