@@ -30,13 +30,13 @@
                             <td>{{ $item->dosen }}</td>
                             <td>{{ $item->kelas }}</td>
                             <td>
-                                <a href="{{ route('materi.show', $item->id) }}" class="btn btn-info btn-sm">Show</a>
+                                <a href="{{ route('materi.show', $item->id) }}" class="btn btn-info btn-sm">Lihat</a>
                                 <a href="{{ route('materi.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
                                 <form action="{{ route('materi.destroy', $item->id) }}" method="POST" class="d-inline">
                                     @csrf
                                     @method('DELETE')
                                     <button type="button" class="btn btn-danger btn-sm show_confirm"
-                                        data-nama="{{ $item->Mata_Kuliah }}">Delete</button>
+                                        data-nama="{{ $item->Mata_Kuliah }}">Hapus</button>
                                 </form>
                             </td>
                         </tr>
