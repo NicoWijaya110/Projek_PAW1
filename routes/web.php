@@ -21,12 +21,12 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-Route::resource('materi', MateriController::class);
+Route::resource('materi',MateriController::class);
 Route::resource('jadwal',JadwalController::class);
-Route::resource('dashboard', DashboardController::class);
+Route::resource('dashboard',DashboardController::class);
 Route::resource('dosen',DosenController::class);
-Route::resource('mahasiswa', MahasiswaController::class);
+Route::resource('mahasiswa',MahasiswaController::class);
 Route::resource('nilai',NilaiController::class);
-Route::resource('absen', AbsenController::class);
+Route::resource('absen',AbsenController::class);
 
 require __DIR__.'/auth.php';
