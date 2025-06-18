@@ -9,13 +9,13 @@ class MahasiswaController extends Controller
 {
     public function index()
     {
-        $Mahasiswa = Mahasiswa::all();
-        return view('Mahasiswa.index', compact('Mahasiswa'));
+        $mahasiswa = Mahasiswa::all();
+        return view('mahasiswa.index', compact('mahasiswa'));
     }
 
     public function create()
-    {   
-        return view('Mahasiswa.create');
+    {
+        return view('mahasiswa.create');
     }
 
     public function store(Request $request)
@@ -24,45 +24,74 @@ class MahasiswaController extends Controller
             'npm' => 'required|string|max:11',
             'nama' => 'required|string|max:30',
             'jk' => 'required|string|max:15',
-            'tanggal_lahir' => 'required|date_format:d-m-y',
+            'tanggal_lahir' => 'required|date',
+            'tempat_lahir' => 'required|string|max:30',
             'asal_sma' => 'required|string|max:30',
             'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
-        Mahasiswa::create($request->all());
+        $data = $request->all();
 
-        return redirect()->route('Mahasiswa.index')->with('success', 'Mahasiswa berhasil ditambahkan.');
+        if ($request->hasFile('foto')) {
+            $filename = time() . '.' . $request->foto->extension();
+            $request->foto->move(public_path('images'), $filename);
+            $data['foto'] = $filename;
+        }
+
+        Mahasiswa::create($data);
+
+        return redirect()->route('mahasiswa.index')->with('success', 'Mahasiswa berhasil ditambahkan.');
     }
 
-    public function show(Mahasiswa $Mahasiswa)
+    public function show(Mahasiswa $mahasiswa)
     {
-        return view('Mahasiswa.show', compact('Mahasiswa'));
+        return view('mahasiswa.show', compact('mahasiswa'));
     }
 
-    public function edit(Mahasiswa $Mahasiswa)
+    public function edit(Mahasiswa $mahasiswa)
     {
-        return view('Mahasiswa.edit', compact('Mahasiswa'));
+        return view('mahasiswa.edit', compact('mahasiswa'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Mahasiswa $mahasiswa)
     {
         $request->validate([
-            'no' => 'required|integer',
-            'mata_kuliah' => 'required|string|max:255',
-            'dosen' => 'required|string|max:255',
-            'kelas' => 'required|string|max:50',
+            'npm' => 'required|string|max:11',
+            'nama' => 'required|string|max:30',
+            'jk' => 'required|string|max:15',
+            'tanggal_lahir' => 'required|date',
+            'tempat_lahir' => 'required|string|max:30',
+            'asal_sma' => 'required|string|max:30',
+            'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
-        $Mahasiswa = Mahasiswa::findOrFail($id);
-        $Mahasiswa->update($request->all());
+        $data = $request->all();
 
-        return redirect()->route('Mahasiswa.index')->with('success', 'Data berhasil diubah.');
+        if ($request->hasFile('foto')) {
+            // Hapus foto lama jika ada
+            if ($mahasiswa->foto && file_exists(public_path('images/' . $mahasiswa->foto))) {
+                unlink(public_path('images/' . $mahasiswa->foto));
+            }
+
+            $filename = time() . '.' . $request->foto->extension();
+            $request->foto->move(public_path('images'), $filename);
+            $data['foto'] = $filename;
+        }
+
+        $mahasiswa->update($data);
+
+        return redirect()->route('mahasiswa.index')->with('success', 'Data berhasil diubah.');
     }
 
-    public function destroy(Mahasiswa $Mahasiswa)
+    public function destroy(Mahasiswa $mahasiswa)
     {
-        $Mahasiswa->delete();
+        // Hapus foto jika ada
+        if ($mahasiswa->foto && file_exists(public_path('images/' . $mahasiswa->foto))) {
+            unlink(public_path('images/' . $mahasiswa->foto));
+        }
 
-        return redirect()->route('Mahasiswa.index')->with('success', 'Mahasiswa berhasil dihapus.');
+        $mahasiswa->delete();
+
+        return redirect()->route('mahasiswa.index')->with('success', 'Mahasiswa berhasil dihapus.');
     }
 }
