@@ -50,7 +50,7 @@
         <!-- Sidebar -->
         <div class="col-md-2 sidebar">
             <h4 class="text-white">E-Learning</h4>
-            <a href="{{ route('dashboard.index') }}" class="{{ request()->is('dashboard*') ? 'active-link' : '' }}">
+            <a href="{{ route('dashboard') }}" class="{{ request()->is('dashboard*') ? 'active-link' : '' }}">
                 <i class="bi bi-graph-up me-2"></i> Dashboard
             </a>
 
