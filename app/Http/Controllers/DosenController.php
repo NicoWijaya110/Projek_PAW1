@@ -31,7 +31,7 @@ class DosenController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-        'NO' => 'required|unique:Dosen',
+        'NO' => 'required|unique:dosen',
         'nama' => 'required',
         'Tahun_Masuk' => 'required',
         'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
