@@ -75,7 +75,7 @@ class NilaiController extends Controller
         // Tentukan status
         $status = $rataRata >= 70 ? 'Lulus' : 'Tidak Lulus';
 
-        // Update data
+        // Update Data
         $nilai->update([
             'mata_kuliah' => $request->mata_kuliah,
             'tugas' => $request->tugas,
