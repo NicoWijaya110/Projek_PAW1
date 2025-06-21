@@ -21,7 +21,7 @@
                             @enderror
 
                             <div class="mb-3">
-                                <label for="hari" class="form-label">hari</label>
+                                <label for="hari" class="form-label">HARI</label>
                                 <input type="text" class="form-control" name="hari" value="{{ old('hari') }}">
                             </div>
                             @error('hari')
@@ -29,7 +29,7 @@
                             @enderror
 
                             <div class="mb-3">
-                                <label for="jam" class="form-label">jam</label>
+                                <label for="jam" class="form-label">JAM</label>
                                 <input type="text" class="form-control" name="jam" value="{{ old('jam') }}">
                             </div>
                             @error('jam')
